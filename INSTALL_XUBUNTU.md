@@ -11,37 +11,38 @@ Install Latest LTS release: 14.04, Trusty Tahr
 ```shell
 sudo apt-get update
 sudo apt-get dist-upgrade -y
-sudo apt-get install bash-completion command-not-found git -y
+sudo apt-get install git openssh-server -y
 ```
 
-###Install CUDA for GPU Support
+###Install Point Grey FlyCapture2 Library
 
-On a host computer open a browser and navigate to:
+Links and instructions for downloading and installing the latest
+FlyCapture 2.x library from Point Grey for Linux can be found here:
 
-<https://developer.nvidia.com/cuda-downloads>
+<http://www.ptgrey.com/support/downloads>
+
+Download Linux (64-bit, 32-bit, or ARM, whichever is appropriate).
+Requires registration.
+
+```shell
+cd ~/Downloads
+tar -zxvf flycapture*
+cd flycapture*
+cat README
+# follow the instructions that the script takes you through
+sudo reboot
+```
+
+```shell
+# plug in Flea3 camera into USB3 port
+flycap
+```
 
 ###Download, Configure, and Build OpenCV
 
 ```shell
-# Some general development libraries
-sudo apt-get install build-essential make cmake cmake-curses-gui g++
-# libav video input/output development libraries
-sudo apt-get install libavformat-dev libavutil-dev libswscale-dev
-# Video4Linux camera development libraries
-sudo apt-get install libv4l-dev
-# OpenGL development libraries (to allow creating graphical windows)
-sudo apt-get install libglew-dev libglewmx-dev
-# Eigen3 math development libraries
-sudo apt-get install libeigen3-dev
-# Extras
-sudo apt-get install python-dev python-numpy
-sudo apt-get install libjpeg-dev libpng-dev libtiff-dev libjasper-dev
-sudo apt-get install libtbb-dev libqt4-dev libqt4-opengl-dev
-sudo apt-get install checkinstall yasm libdc1394-22-dev libxine-dev
-sudo apt-get install libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev
-sudo apt-get install libgtk2.0-dev libmp3lame-dev
-sudo apt-get install libopencore-amrnb-dev libopencore-amrwb-dev libtheora-dev
-sudo apt-get install libvorbis-dev libxvidcore-dev x264 v4l-utils libav-tools
+sudo apt-get install build-essential libgtk2.0-dev libjpeg-dev libtiff4-dev libjasper-dev libopenexr-dev cmake python-dev python-numpy python-tk libtbb-dev libeigen3-dev yasm libfaac-dev libopencore-amrnb-dev libopencore-amrwb-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev libqt4-dev libqt4-opengl-dev sphinx-common texlive-latex-extra libv4l-dev libdc1394-22-dev libavcodec-dev libavformat-dev libswscale-dev default-jdk ant libvtk5-qt4-dev
+
 mkdir ~/git
 cd ~/git
 git clone https://github.com/Itseez/opencv.git
@@ -49,7 +50,7 @@ cd opencv
 git checkout -b 2.4 origin/2.4
 mkdir -p ~/builds/opencv/opencv-2.4
 cd ~/builds/opencv/opencv-2.4
-cmake -D CUDA_ARCH_BIN="3.2" -D CUDA_ARCH_PTX="" -D BUILD_TESTS=OFF -D BUILD_PERF_TESTS=OFF -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_TBB=ON -D WITH_QT=ON -D WITH_CUDA=ON -D WITH_CUBLAS=ON -D CUDA_FAST_MATH=ON -D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda/ -D WITH_V4L=ON -D WITH_OPENGL=OFF -D INSTALL_C_EXAMPLES=ON -D INSTALL_PYTHON_EXAMPLES=ON -D INSTALL_TESTS=ON -D BUILD_EXAMPLES=OFF -D WITH_OPENCL=ON -D ENABLE_FAST_MATH=ON -D ENABLE_PROFILING=ON ~/git/opencv
+cmake -D WITH_TBB=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -D WITH_V4L=ON -D INSTALL_C_EXAMPLES=ON -D INSTALL_PYTHON_EXAMPLES=ON -D BUILD_EXAMPLES=ON -D WITH_QT=ON -D WITH_OPENGL=ON -D WITH_VTK=ON  ~/git/opencv
 make -j2
 sudo checkinstall
 ```
@@ -65,12 +66,10 @@ sudo dpkg -r opencv
 <http://wiki.ros.org/ROS/Installation>
 
 ```shell
-sudo update-locale LANG=C LANGUAGE=C LC_ALL=C LC_MESSAGES=POSIX
-sudo sh -c 'echo "deb http://packages.namniart.com/repos/ros trusty main" > /etc/apt/sources.list.d/ros-latest.list'
-wget http://packages.namniart.com/repos/namniart.key -O - | sudo apt-key add -
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu trusty main" > /etc/apt/sources.list.d/ros-latest.list'
+wget https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -O - | sudo apt-key add -
 sudo apt-get update
-sudo apt-get install ros-indigo-ros-base
-sudo apt-get install python-rosdep
+sudo apt-get install ros-indigo-desktop-full
 sudo rosdep init
 rosdep update
 echo "source /opt/ros/indigo/setup.bash" >> ~/.bashrc
@@ -82,42 +81,6 @@ catkin_init_workspace
 cd ..
 catkin_make
 source devel/setup.bash
-```
-
-###Install Point Grey FlyCapture2 Library
-
-Links and instructions for downloading and installing the latest
-FlyCapture2 library from Point Grey for Linux can be found here:
-
-<http://www.ptgrey.com/support/downloads>
-
-```shell
-cd ~/Downloads
-tar -zxvf flycapture*
-cd flycapture-<version>_arm/lib
-sudo cp libflycapture.so* /usr/lib
-cd ..
-sudo cp -n -r include/* /usr/include
-cd ..
-sudo sh flycap2-conf
-# follow the instructions that the script takes you through
-sudo reboot
-```
-
-On a host computer ssh into ubuntu@tegra-ubuntu:
-
-```shell
-mkdir ~/bin
-mkdir ~/lib
-mkdir ~/flycapture_examples
-cd ~/Downloads/flycapture-<version>_arm/
-cp -r src/* ~/flycapture_examples
-cd ~/flycapture_examples/FlyCapture2Test
-make
-mkdir ~/Pictures/FlyCapture2Test
-# plug in Flea3 camera into USB3 port
-cd ~/Pictures/FlyCapture2Test
-~/bin/FlyCapture2Test
 ```
 
 ###Install ROS Point Grey Camera Driver
