@@ -24,9 +24,6 @@ FlyCapture 2.x library from Point Grey for Linux can be found here:
 Download Linux (64-bit, 32-bit, or ARM, whichever is appropriate).
 Requires registration.
 
-FlyCapture 2.6.3.4 seems to be the latest release that works with the
-ROS Pointgrey Camera Driver.
-
 ```shell
 cd ~/Downloads
 tar -zxvf flycapture*
