@@ -24,6 +24,9 @@ FlyCapture 2.x library from Point Grey for Linux can be found here:
 Download Linux (64-bit, 32-bit, or ARM, whichever is appropriate).
 Requires registration.
 
+FlyCapture 2.6.3.4 seems to be the latest release that works with the
+ROS Pointgrey Camera Driver.
+
 ```shell
 cd ~/Downloads
 tar -zxvf flycapture*
@@ -89,7 +92,10 @@ source devel/setup.bash
 sudo apt-get install ros-indigo-driver-common
 cd ~/catkin_ws/src/
 git clone https://github.com/ros-drivers/pointgrey_camera_driver.git
-cd ..
+git clone https://github.com/ros-perception/image_pipeline.git
+cd image_pipeline/
+git checkout tags/1.12.10
+cd ../..
 catkin_make
 echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 source ~/.bashrc
@@ -100,6 +106,7 @@ source ~/.bashrc
 Connect Point Grey USB3 camera to USB3 port.
 
 ```shell
+rosrun pointgrey_camera_driver list_cameras
 roslaunch pointgrey_camera_driver camera.launch
 ```
 
