@@ -127,6 +127,12 @@ sudo apt-get install ros-indigo-uvc-camera
 Connect USB camera to USB port.
 
 ```shell
+roscore
+```
+
+Open another terminal and run:
+
+```shell
 rosrun uvc_camera uvc_camera_node
 ```
 
