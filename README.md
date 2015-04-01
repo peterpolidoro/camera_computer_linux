@@ -10,3 +10,5 @@ License:
     BSD
 
 [Install Instructions](./INSTALL_XUBUNTU.md)
+
+[Examples](./examples)
