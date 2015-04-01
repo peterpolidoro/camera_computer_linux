@@ -85,8 +85,6 @@ source devel/setup.bash
 
 ###Install ROS Point Grey Camera Driver
 
-On a host computer ssh into ubuntu@tegra-ubuntu:
-
 ```shell
 sudo mkdir /usr/include/flycapture
 sudo ln -s /usr/include/FlyCapture2.h /usr/include/flycapture/FlyCapture2.h
@@ -104,24 +102,13 @@ source ~/.bashrc
 
 ####Test ROS Point Grey Camera Driver
 
-Connect Point Grey USB3 camera to Jetson USB3 port.
-
-On host computer run:
+Connect Point Grey USB3 camera to USB3 port.
 
 ```shell
-hostname #Use response in <hostname_master_computer> below
-roscore
-```
-
-On a host computer ssh into ubuntu@tegra-ubuntu:
-
-```shell
-rosrun pointgrey_camera_driver list_cameras
-export ROS_MASTER_URI=http://<hostname_master_computer>:11311
 roslaunch pointgrey_camera_driver camera.launch
 ```
 
-On another terminal on the host computer run:
+Open another terminal and run:
 
 ```shell
 rosrun image_view image_view image:=/camera/image_raw
@@ -129,31 +116,19 @@ rosrun image_view image_view image:=/camera/image_raw
 
 ###Install ROS UVC Camera Driver
 
-On a host computer ssh into ubuntu@tegra-ubuntu:
-
 ```shell
 sudo apt-get install ros-indigo-uvc-camera
 ```
 
 ####Test ROS UVC Camera Driver
 
-Connect USB camera to Jetson USB3 port.
-
-On host computer run:
+Connect USB camera to USB port.
 
 ```shell
-hostname #Use response in <hostname_master_computer> below
-roscore
-```
-
-On a host computer ssh into ubuntu@tegra-ubuntu:
-
-```shell
-export ROS_MASTER_URI=http://<hostname_master_computer>:11311
 rosrun uvc_camera uvc_camera_node
 ```
 
-On another terminal on the host computer run:
+Open another terminal and run:
 
 ```shell
 rosrun image_view image_view image:=/image_raw
