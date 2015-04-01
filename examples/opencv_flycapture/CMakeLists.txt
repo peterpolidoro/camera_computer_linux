@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 project( opencv_flycapture )
 find_package( OpenCV REQUIRED )
-include_directories("/usr/include/flycapture")
-find_library(FLYCAPTURE2 flyCapture)
+find_package( FlyCapture REQUIRED )
 add_executable( opencv_flycapture opencv_flycapture.cpp )
 target_link_libraries( opencv_flycapture ${OpenCV_LIBS} )
