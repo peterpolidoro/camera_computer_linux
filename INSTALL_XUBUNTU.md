@@ -86,12 +86,7 @@ source devel/setup.bash
 ###Install ROS Point Grey Camera Driver
 
 ```shell
-sudo mkdir /usr/include/flycapture
-sudo ln -s /usr/include/FlyCapture2.h /usr/include/flycapture/FlyCapture2.h
-sudo apt-get install ros-indigo-roslint
-sudo apt-get install ros-indigo-camera-info-manager
 sudo apt-get install ros-indigo-driver-common
-sudo apt-get install ros-indigo-image-proc
 cd ~/catkin_ws/src/
 git clone https://github.com/ros-drivers/pointgrey_camera_driver.git
 cd ..
