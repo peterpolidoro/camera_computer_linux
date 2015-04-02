@@ -15,3 +15,11 @@ cd ~/builds/opencv_flycapture/opencv_flycapture-1.0
 cmake ~/git/camera_computer_linux/examples/opencv_flycapture/
 make
 ```
+
+Run This Example
+----------------
+
+```shell
+cd ~/builds/opencv_flycapture/opencv_flycapture-1.0
+./opencv_flycapture
+```
