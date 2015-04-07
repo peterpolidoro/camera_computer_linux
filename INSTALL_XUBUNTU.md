@@ -33,9 +33,23 @@ cat README
 sudo reboot
 ```
 
+###Test Point Grey FlyCapture2 Library
+
 ```shell
 # plug in Flea3 camera into USB3 port
 flycap
+```
+
+```shell
+cp -r /usr/src/flycapture/src/ ~/flycapture_examples
+mkdir ~/bin
+mkdir ~/lib
+cd ~/flycapture_examples/FlyCapture2Test
+make
+mkdir ~/Pictures/FlyCapture2Test
+# plug in Flea3 camera into USB3 port
+cd ~/Pictures/FlyCapture2Test
+~/bin/FlyCapture2Test
 ```
 
 ###Download, Configure, and Build OpenCV
