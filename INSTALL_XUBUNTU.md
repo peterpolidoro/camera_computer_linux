@@ -56,7 +56,6 @@ cd ~/Pictures/FlyCapture2Test
 
 ```shell
 sudo apt-get install build-essential checkinstall libgtk2.0-dev libjpeg-dev libtiff4-dev libjasper-dev libopenexr-dev cmake python-dev python-numpy python-tk libtbb-dev libeigen3-dev yasm libfaac-dev libopencore-amrnb-dev libopencore-amrwb-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev libqt4-dev libqt4-opengl-dev sphinx-common texlive-latex-extra libv4l-dev libdc1394-22-dev libavcodec-dev libavformat-dev libswscale-dev default-jdk ant libvtk5-qt4-dev
-
 mkdir ~/git
 cd ~/git
 git clone https://github.com/Itseez/opencv.git
