@@ -13,7 +13,7 @@ static void help()
     << "------------------------------------------------------------------------------" << std::endl
     << "This program shows how to write image files."                                   << std::endl
     << "Usage:"                                                                         << std::endl
-    << "./opencv_datetime_imwrite output_path"                                          << std::endl
+    << "./opencv_datetime_imwrite output_path_base"                                     << std::endl
     << "------------------------------------------------------------------------------" << std::endl
     << std::endl;
 }
