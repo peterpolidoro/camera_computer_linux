@@ -21,5 +21,5 @@ Run This Example
 
 ```shell
 cd ~/builds/opencv_datetime_imwrite/opencv_datetime_imwrite-1.0
-./opencv_datetime_imwrite
+./opencv_datetime_imwrite output_path_base
 ```

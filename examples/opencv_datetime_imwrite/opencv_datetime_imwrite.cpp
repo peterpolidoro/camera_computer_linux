@@ -2,6 +2,7 @@
 #include <opencv2/highgui/highgui.hpp>
 
 #include <iostream>
+#include <fstream>
 
 #include <boost/filesystem.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
@@ -59,6 +60,13 @@ int main(int argc, char *argv[])
   boost::filesystem::path output_dir(date_time_string);
   boost::filesystem::path output_path = output_path_base / output_dir;
   createDirectory(output_path);
+
+  boost::filesystem::path run_info_file_path("run_info");
+  boost::filesystem::path run_info_file_path_full = output_path_base / run_info_file_path;
+  std::ofstream run_info_file;
+  run_info_file.open(run_info_file_path_full.string().c_str());
+  run_info_file << output_path << std::endl;
+  run_info_file.close();
 
   std::vector<int> compression_params;
   compression_params.push_back(CV_IMWRITE_PNG_COMPRESSION);
