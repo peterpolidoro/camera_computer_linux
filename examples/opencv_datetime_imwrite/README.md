@@ -23,3 +23,19 @@ Run This Example
 cd ~/builds/opencv_datetime_imwrite/opencv_datetime_imwrite-1.0
 ./opencv_datetime_imwrite output_path_base
 ```
+
+Stopping This Example
+---------------------
+
+In originating terminal type:
+
+```shell
+q
+```
+
+Or open another terminal and type:
+
+```shell
+PID=`pidof opencv_datetime_imwrite`
+kill $PID
+```

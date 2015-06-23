@@ -7,6 +7,8 @@
 #include <boost/filesystem.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 
+#include <signal.h>
+
 
 static void help()
 {
@@ -42,6 +44,16 @@ boost::filesystem::path createDirectory(const boost::filesystem::path &path)
   return path;
 }
 
+struct sigaction act;
+volatile bool killed = false;
+
+void sighandler(int signum, siginfo_t *info, void *ptr)
+{
+  std::cout << "Received signal " << signum << std::endl;
+  std::cout << "Signal originates from process " << (unsigned long)info->si_pid << std::endl;
+  killed = true;
+}
+
 int main(int argc, char *argv[])
 {
   help();
@@ -51,6 +63,15 @@ int main(int argc, char *argv[])
     std::cout << "Not enough parameters" << std::endl;
     return -1;
   }
+
+  // Setup signal handler
+  std::cout << "I am " << (unsigned long)getpid() << std::endl;
+  memset(&act, 0, sizeof(act));
+
+  act.sa_sigaction = sighandler;
+  act.sa_flags = SA_SIGINFO;
+
+  sigaction(SIGTERM, &act, NULL);
 
   // Create base directory
   boost::filesystem::path output_path_base(argv[1]);
@@ -79,7 +100,7 @@ int main(int argc, char *argv[])
   char key = 0;
   int color = 0;
   boost::posix_time::ptime start_time = boost::posix_time::second_clock::local_time();
-  while(key != 'q')
+  while ((key != 'q') && !(killed))
   {
     cv::Mat image = cv::Mat(100,100,CV_8UC3,cv::Scalar(color,color,255));
     color++;
@@ -130,3 +151,34 @@ int main(int argc, char *argv[])
   std::cout << "Images per second: " << image_count/run_duration_seconds << std::endl;
   return 0;
 }
+
+// #include <stdio.h>
+// #include <signal.h>
+// #include <string.h>
+// #include <unistd.h>
+
+// struct sigaction act;
+
+// void sighandler(int signum, siginfo_t *info, void *ptr)
+// {
+//     printf("Received signal %d\n", signum);
+//     printf("Signal originates from process %lu\n",
+//         (unsigned long)info->si_pid);
+// }
+
+// int main()
+// {
+//     printf("I am %lu\n", (unsigned long)getpid());
+
+//     memset(&act, 0, sizeof(act));
+
+//     act.sa_sigaction = sighandler;
+//     act.sa_flags = SA_SIGINFO;
+
+//     sigaction(SIGTERM, &act, NULL);
+
+//     // Waiting for CTRL+C...
+//     sleep(100);
+
+//     return 0;
+// }
