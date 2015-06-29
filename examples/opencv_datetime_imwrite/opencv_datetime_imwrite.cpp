@@ -136,23 +136,17 @@ int main(int argc, char *argv[])
 
   // Setup signal handler SIGTERM
   memset(&g_action_sigterm, 0, sizeof(g_action_sigterm));
-
   g_action_sigterm.sa_handler = sighandler_sigterm;
-
   sigaction(SIGTERM, &g_action_sigterm, NULL);
 
   // Setup signal handler SIGUSR1
   memset(&g_action_sigusr1, 0, sizeof(g_action_sigusr1));
-
   g_action_sigusr1.sa_handler = sighandler_sigusr1;
-
   sigaction(SIGUSR1, &g_action_sigusr1, NULL);
 
   // Setup signal handler SIGUSR2
   memset(&g_action_sigusr2, 0, sizeof(g_action_sigusr2));
-
   g_action_sigusr2.sa_handler = sighandler_sigusr2;
-
   sigaction(SIGUSR2, &g_action_sigusr2, NULL);
 
   // Create base directory
