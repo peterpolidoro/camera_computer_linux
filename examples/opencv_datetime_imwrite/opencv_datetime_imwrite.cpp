@@ -27,8 +27,18 @@ static void help()
   std::cout
     << "------------------------------------------------------------------------------" << std::endl
     << "This program shows how to write image files."                                   << std::endl
-    << "Usage:"                                                                         << std::endl
+    << "Start Program:"                                                                 << std::endl
     << "./opencv_datetime_imwrite output_path_base"                                     << std::endl
+    << std::endl
+    << "Start Saving Images:"                                                           << std::endl
+    << "PID=`pidof opencv_datetime_imwrite`"                                            << std::endl
+    << "kill -s USR1 $PID"                                                              << std::endl
+    << std::endl
+    << "Stop Saving Images:"                                                            << std::endl
+    << "kill -s USR2 $PID"                                                              << std::endl
+    << std::endl
+    << "Stop Program:"                                                                  << std::endl
+    << "kill $PID"                                                                      << std::endl
     << "------------------------------------------------------------------------------" << std::endl
     << std::endl;
 }
@@ -126,6 +136,7 @@ void sighandler_sigusr2(int signum)
 int main(int argc, char *argv[])
 {
   g_setup = false;
+
   help();
 
   if (argc != 2)

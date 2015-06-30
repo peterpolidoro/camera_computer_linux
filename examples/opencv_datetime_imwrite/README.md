@@ -5,6 +5,12 @@ opencv_datetime_imwrite
 
 [Install Instructions](../../INSTALL_XUBUNTU.md)
 
+##Install Dependencies
+
+```shell
+sudo apt-get install libboost-date-time-dev libboost-filesystem-dev -y
+```
+
 ##Build This Example
 
 ```shell
@@ -35,7 +41,7 @@ PID=`pidof opencv_datetime_imwrite`
 kill -s USR2 $PID
 ```
 
-##Stopping Program
+##Stop Program
 
 In originating terminal type:
 
